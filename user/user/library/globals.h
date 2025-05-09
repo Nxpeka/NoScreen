@@ -9,6 +9,7 @@
 #include <Shlobj.h>
 #include <stdio.h>
 #include <ntstatus.h>
+#include <windowsx.h>
 
 using namespace std;
 

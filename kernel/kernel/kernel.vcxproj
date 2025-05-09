@@ -159,6 +159,9 @@
       <ProgramDatabaseFile />
       <EntryPointSymbol>entry_point</EntryPointSymbol>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA1</FileDigestAlgorithm>
+    </DriverSign>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Inf Include="kernel.inf" />
