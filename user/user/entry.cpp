@@ -6,6 +6,24 @@ HWND g_button = nullptr;
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 void StartWindowSelection(HWND);
 
+void SetWaitingBtn() 
+{
+    if (g_button)
+    {
+        EnableWindow(g_button, FALSE);
+        SetWindowText(g_button, L"Waiting window...");
+    }
+}
+
+void SetSelectBtn()
+{
+    if (g_button) 
+    {
+        EnableWindow(g_button, TRUE);
+        SetWindowText(g_button, L"Select Target");
+    }
+}
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow)
 {
     const wchar_t CLASS_NAME[] = L"MELLSTROYs";
@@ -43,8 +61,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
         if (LOWORD(wParam) == 100)
         {
-            EnableWindow(g_button, FALSE);
-            SetWindowText(g_button, L"Waiting window...");
             if (!service_is_load())
             {
                 MessageBox(hwnd, L"Driver is not loaded...", L"MELLSTROY HWND", MB_ICONERROR);
@@ -62,6 +78,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 void StartWindowSelection(HWND owner)
 {
+    SetWaitingBtn();
     SetCursor(LoadCursor(nullptr, IDC_CROSS));
     SetCapture(owner);
 
@@ -84,6 +101,5 @@ void StartWindowSelection(HWND owner)
 
     SetWindowText(g_button, L"Window selected :)");
     Sleep(750);
-    EnableWindow(g_button, TRUE);
-    SetWindowText(g_button, L"Select Target");
+    SetSelectBtn();
 }
